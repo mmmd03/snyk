@@ -10,6 +10,25 @@ Describe "Snyk test command"
       snyk test
     }
 
+    run_test_in_empty_subfolder() {
+      cd ../fixtures/empty || return
+      snyk test
+    }
+
+    It "throws error when file does not exist"
+      When run snyk test --file=non-existent/package.json
+      The status should equal 2
+      The output should include "Could not find the specified file"
+      The stderr should equal ""
+    End
+
+    It "throws error when no suppored manifests detected"
+      When run run_test_in_empty_subfolder
+      The status should equal 3
+      The output should include "Could not detect supported target files in"
+      The stderr should equal ""
+    End
+
     It "finds vulns in a project in the same folder"
       When run run_test_in_subfolder
       The status should be failure # issues found
