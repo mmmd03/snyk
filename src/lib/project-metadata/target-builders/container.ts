@@ -1,10 +1,11 @@
 import { DepTree } from '../../types';
 import { ContainerTarget } from '../types';
 import { ScannedProject } from '@snyk/cli-interface/legacy/common';
+import { ScanResult } from '../../ecosystems';
 
 export async function getInfo(
   isFromContainer: boolean,
-  scannedProject: ScannedProject,
+  scannedProject: ScannedProject | ScanResult,
   packageInfo?: DepTree,
 ): Promise<ContainerTarget | null> {
   // safety check

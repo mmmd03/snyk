@@ -4,6 +4,7 @@ import { GitTarget, ContainerTarget } from './types';
 import { DepTree } from '../types';
 import { InvalidRemoteUrlError } from '../errors/invalid-remote-url-error';
 import { ScannedProject } from '@snyk/cli-interface/legacy/common';
+import { ScanResult } from '../ecosystems';
 
 const TARGET_BUILDERS = [containerTargetBuilder, gitTargetBuilder];
 interface Options {
@@ -12,7 +13,7 @@ interface Options {
   isDocker?: boolean; // isDocker coming from MonitorMeta
 }
 export async function getInfo(
-  scannedProject: ScannedProject,
+  scannedProject: ScannedProject | ScanResult,
   options: Options,
   packageInfo?: DepTree,
 ): Promise<GitTarget | ContainerTarget | null> {
