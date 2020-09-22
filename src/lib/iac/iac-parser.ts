@@ -62,8 +62,6 @@ export function validateK8sFile(
       continue;
     }
 
-    const kind = k8sObject.kind.toLowerCase();
-
     numOfSupportedKeyDocs++;
 
     for (let i = 0; i < requiredK8SObjectFields.length; i++) {
